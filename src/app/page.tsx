@@ -28,12 +28,7 @@ export default function Home() {
       <div className='flex justify-center'>
         <div className='grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4 lg:grid-cols-4 xl:grid-cols-4'>
           {data.characters.results.map((character: Character) => (
-            <Link
-              key={character.id}
-              href={`/character/${encodeURIComponent(
-                character.name.toLowerCase().replace(/\s+/g, '-')
-              )}`}
-            >
+            <Link key={character.id} href={`/character/${character.id}`}>
               <CharacterCard {...character} />
             </Link>
           ))}

@@ -16,37 +16,34 @@ export const GET_CHARACTERS = gql`
   }
 `;
 
-export const GET_CHARACTER_BY_NAME = gql`
-  query GetCharacterInfo($name: String!) {
-    characters(filter: { name: $name }) {
-      results {
+export const GET_CHARACTER_INFO = gql`
+  query GetCharacterInfo($id: ID!) {
+    character(id: $id) {
+      id
+      name
+      status
+      species
+      gender
+      image
+      origin {
         id
-        image
         name
-        status
-        species
-        gender
-        origin {
-          name
-        }
       }
     }
   }
 `;
 
 export const GET_PLANET_INFO = gql`
-  query GetPlanetInfo($name: String!) {
-    locations(filter: { name: $name }) {
-      results {
+  query GetPlanetInfo($id: ID!) {
+    location(id: $id) {
+      id
+      name
+      type
+      dimension
+      residents {
         id
         name
-        type
-        dimension
-        residents {
-          id
-          name
-          image
-        }
+        image
       }
     }
   }

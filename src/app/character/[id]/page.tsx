@@ -1,22 +1,19 @@
 'use client';
 
-import { GET_CHARACTER_BY_NAME } from '@/lib/graphql/queries';
-import { Character } from '@/lib/graphql/types';
+import { GET_CHARACTER_INFO } from '@/lib/graphql/queries';
 import { getStatusColor } from '@/utils/get-status-color';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'next/navigation';
-import { normalizeName } from '@/utils/normalize-name';
 import { InfoCard } from '@/components/info-card';
 import { Loading } from '@/components/loading';
+import { Back } from '@/components/back';
 import Image from 'next/image';
-import Link from 'next/link';
 
 export default function CharacterPage() {
-  const { name } = useParams();
-  const decodedName = decodeURIComponent(name as string).replace(/-/g, ' ');
+  const { id } = useParams();
 
-  const { loading, error, data } = useQuery(GET_CHARACTER_BY_NAME, {
-    variables: { name: decodedName },
+  const { loading, error, data } = useQuery(GET_CHARACTER_INFO, {
+    variables: { id: id },
   });
 
   if (loading) return <Loading />;
@@ -30,29 +27,21 @@ export default function CharacterPage() {
       </div>
     );
 
-  const character =
-    data?.characters?.results.find(
-      (c: Character) => normalizeName(c.name) === name
-    ) || data?.characters?.results[0];
+  const character = data.character;
 
   return (
     <div className='bg-gray-900 p-4 md:p-6'>
       <div className='max-w-4xl mx-auto'>
-        <Link
-          href='/'
-          className='flex items-center text-gray-300 hover:text-blue-200 transition-colors mb-6'
-        >
-          Voltar para a lista
-        </Link>
+        <Back />
 
         <div className='bg-gray-800 rounded-xl shadow-lg overflow-hidden'>
-          <div className='relative h-64 md:h-80 w-full'>
+          <div className='relative h-64 md:h-96 w-full'>
             <Image
               src={character.image}
               alt={character.name}
               fill
-              className='object-cover'
-              sizes='100vw'
+              className='object-cover rounded-t-lg'
+              sizes='(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 100vw'
               priority
             />
           </div>
@@ -81,9 +70,7 @@ export default function CharacterPage() {
                   label='Origem'
                   value={character.origin?.name}
                   isLink={character.origin?.name}
-                  href={`/planet/${encodeURIComponent(
-                    character.origin?.name.toLowerCase().replace(/\s+/g, '-')
-                  )}`}
+                  href={`/planet/${character.origin.id}`}
                 />
               </div>
             </div>
