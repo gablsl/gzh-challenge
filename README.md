@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rick and Morty - Desafio GZH
 
-## Getting Started
+## 🧰 Tecnologias e Ferramentas
 
-First, run the development server:
+- **Next.js**  
+  Utilizado por eu ter mais familiaridade com o NextJS, uso tanto em projetos locais como profissionalmente. Conheço bem como usar seus principais recursos.
+
+- **Apollo Client**  
+  Escolhido para realizar requisições GraphQL de forma otimizada e com cache automático. Além de eu conseguir gerenciar facilmente os estados de loading e error e poder apresentá-los ao usuário
+
+- **Tailwind CSS**  
+  Utilizado para estilização. Tenho grande familiaridade e por ser breakpoints (sm, md, lg) facilitam a não me preocupar com os tamanhos na hora da responsividade optei por Tailwind.
+
+- **useState**  
+  Optei por não usar ContextAPI ou Redux pois como é um projeto simples e não criei nenhum estado que seria compartilhado entre vários componentes escolhi o useState por ser que julguei ser a melhor opção nesse caso e mais simples de ser implementado.
+
+---
+
+## 🚀 Como rodar o projeto localmente
+
+I. Clone o repositório:
+
+```bash
+git clone https://github.com/gablsl/gzh-challenge.git
+```
+
+II - Instale as dependências
+
+```bash
+npm install
+```
+
+III - Rode o projeto
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ⚙️ Decisões Técnicas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Escolha de NextJS por conta facilidade para configuração de SEO, rotas dinâmicas, páginas de erros customizáveis (404, 500) e poder usar o SSR para renderizar componentes e jogar menos JavaScript para o navegador, trazendo mais desempenho a aplicação.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Foi adicionada uma validação extra nas rotas dinâmicas de personagens e planetas de origem para redirecionar à página 404 caso o ID seja inválido ou exceda o número total.
 
-## Learn More
+- Os componentes são modulares e reutilizáveis, priorizando organização e legibilidade.
 
-To learn more about Next.js, take a look at the following resources:
+- Escolha do TypeScript por conta forte tipagem, tornar o código mais legível e facilitar a manutenção
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📌 Observações importantes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Se o personagem ou a origem de um personagem não tiver ID (null), o link da página /character/null ou planet/null é evitado e a navegação não é exibida.
 
-## Deploy on Vercel
+- Componente de Loading para dar uma feedback visual ao usuário de carregamento.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Há uma página de erro para tratar problemas com a API (500) e uma página 404 personalizada.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- A aplicação é responsiva e adaptada para dispositivos móveis (tablet e mobile).
