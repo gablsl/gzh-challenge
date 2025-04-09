@@ -3,7 +3,7 @@
 import { Loading } from '@/components/loading';
 import { GET_PLANET_INFO } from '@/lib/graphql/queries';
 import { useQuery } from '@apollo/client';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { Resident } from '@/lib/graphql/types';
 import { Back } from '@/components/back';
 import Image from 'next/image';
@@ -11,6 +11,8 @@ import Link from 'next/link';
 
 export default function PlanetPage() {
   const { id } = useParams();
+  const router = useRouter();
+
   const validId = typeof id === 'string' && id.trim() && id !== 'null';
 
   const { loading, error, data } = useQuery(GET_PLANET_INFO, {
@@ -20,26 +22,12 @@ export default function PlanetPage() {
 
   if (loading) return <Loading />;
 
-  if (error)
-    return (
-      <div className='bg-gray-900 p-6'>
-        <div className='max-w-4xl mx-auto bg-gray-800 p-6 rounded-xl shadow-lg'>
-          <p className='text-red-400'>Error: {error.message}</p>
-        </div>
-      </div>
-    );
+  if (error) return router.push('/500');
 
   const planet = data?.location;
 
-  if (!validId) {
-    return (
-      <div className='bg-gray-900 p-6'>
-        <div className='max-w-4xl mx-auto bg-gray-800 p-6 rounded-xl shadow-lg'>
-          <Back />
-          <p className='text-white'>Origem não encontrada</p>
-        </div>
-      </div>
-    );
+  if (!planet) {
+    return router.push('/404');
   }
 
   return (

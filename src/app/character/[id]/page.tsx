@@ -3,7 +3,7 @@
 import { GET_CHARACTER_INFO } from '@/lib/graphql/queries';
 import { getStatusColor } from '@/utils/get-status-color';
 import { useQuery } from '@apollo/client';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { InfoCard } from '@/components/info-card';
 import { Loading } from '@/components/loading';
 import { Back } from '@/components/back';
@@ -11,6 +11,7 @@ import Image from 'next/image';
 
 export default function CharacterPage() {
   const { id } = useParams();
+  const router = useRouter();
   const validId = typeof id === 'string' && id.trim() && id !== 'null';
 
   const { loading, error, data } = useQuery(GET_CHARACTER_INFO, {
@@ -20,27 +21,13 @@ export default function CharacterPage() {
 
   if (loading) return <Loading />;
 
-  if (error)
-    return (
-      <div className='bg-gray-50 p-6'>
-        <div className='max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md'>
-          <p className='text-red-500'>Erro: {error.message}</p>
-        </div>
-      </div>
-    );
-
-  if (!validId) {
-    return (
-      <div className='bg-gray-900 p-6'>
-        <div className='max-w-4xl mx-auto bg-gray-800 p-6 rounded-xl shadow-lg'>
-          <Back />
-          <p className='text-white'>Personagem não encontrado</p>
-        </div>
-      </div>
-    );
-  }
+  if (error) return router.push('/500');
 
   const character = data.character;
+
+  if (!character) {
+    return router.push('/404');
+  }
 
   return (
     <div className='bg-gray-900 p-4 md:p-6'>
