@@ -6,6 +6,7 @@ import { GET_CHARACTERS } from '@/lib/graphql/queries';
 import { Character } from '@/lib/graphql/types';
 import { useQuery } from '@apollo/client';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,10 +26,14 @@ export default function Home() {
       <div className='flex justify-center'>
         <div className='grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4 lg:grid-cols-4 xl:grid-cols-4'>
           {data.characters.results.map((character: Character) => (
-            <CharacterCard
-              key={`${crypto.randomUUID()}-${character.name}`}
-              {...character}
-            />
+            <Link
+              key={character.id}
+              href={`/character/${encodeURIComponent(
+                character.name.toLowerCase().replace(/\s+/g, '-')
+              )}`}
+            >
+              <CharacterCard {...character} />
+            </Link>
           ))}
         </div>
       </div>
