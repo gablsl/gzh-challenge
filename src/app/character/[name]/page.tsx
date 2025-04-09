@@ -81,7 +81,7 @@ export default function CharacterPage() {
                   label='Origem'
                   value={character.origin?.name}
                   isLink={character.origin?.name}
-                  href={`/location/${encodeURIComponent(
+                  href={`/planet/${encodeURIComponent(
                     character.origin?.name.toLowerCase().replace(/\s+/g, '-')
                   )}`}
                 />
