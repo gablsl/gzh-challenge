@@ -50,7 +50,7 @@ export default function Home() {
         </div>
       </div>
 
-      {data.characters.results.length === 0 ? (
+      {data.characters.results.length <= 19 ? (
         <></>
       ) : (
         <div className='flex items-center gap-4 mt-8 sm:flex-row sm:justify-center'>
