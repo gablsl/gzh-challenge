@@ -11,9 +11,11 @@ import Image from 'next/image';
 
 export default function CharacterPage() {
   const { id } = useParams();
+  const validId = typeof id === 'string' && id.trim() && id !== 'null';
 
   const { loading, error, data } = useQuery(GET_CHARACTER_INFO, {
     variables: { id: id },
+    skip: !validId,
   });
 
   if (loading) return <Loading />;
@@ -27,6 +29,17 @@ export default function CharacterPage() {
       </div>
     );
 
+  if (!validId) {
+    return (
+      <div className='bg-gray-900 p-6'>
+        <div className='max-w-4xl mx-auto bg-gray-800 p-6 rounded-xl shadow-lg'>
+          <Back />
+          <p className='text-white'>Personagem não encontrado</p>
+        </div>
+      </div>
+    );
+  }
+
   const character = data.character;
 
   return (
@@ -35,19 +48,18 @@ export default function CharacterPage() {
         <Back />
 
         <div className='bg-gray-800 rounded-xl shadow-lg overflow-hidden'>
-          <div className='relative h-64 md:h-96 w-full'>
+          <div className='relative h-64 md:h-115 w-full'>
             <Image
               src={character.image}
               alt={character.name}
               fill
-              className='object-cover rounded-t-lg'
-              sizes='(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 100vw'
+              className='object-cover'
               priority
             />
           </div>
 
           <div className='p-6'>
-            <div className='flex justify-between items-start'>
+            <div className='flex justify-between items-center'>
               <h1 className='text-3xl font-bold text-white'>
                 {character.name}
               </h1>

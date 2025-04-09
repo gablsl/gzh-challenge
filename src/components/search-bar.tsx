@@ -26,7 +26,7 @@ export function SearchBar({ onSearch }: SearchBarProps) {
       />
       <button
         type='submit'
-        className='bg-gray-800 text-white p-3 rounded hover:scale-105 transition-transform'
+        className='bg-purple-600 text-white border border-bg-white p-3 rounded hover:bg-purple-700 transition-colors'
       >
         Buscar
       </button>

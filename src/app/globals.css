@@ -16,3 +16,9 @@
     @apply ring-offset-0 !ring-0;
   }
 }
+
+@layer components {
+  .pagination-button {
+    @apply px-4 py-2 bg-purple-600 rounded disabled:opacity-50 hover:bg-purple-700;
+  }
+}

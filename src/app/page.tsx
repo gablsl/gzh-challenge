@@ -6,6 +6,7 @@ import { GET_CHARACTERS } from '@/lib/graphql/queries';
 import { Character } from '@/lib/graphql/types';
 import { useQuery } from '@apollo/client';
 import { useState } from 'react';
+import { Loading } from '@/components/loading';
 import Link from 'next/link';
 
 export default function Home() {
@@ -16,7 +17,7 @@ export default function Home() {
     variables: { page: currentPage, name: search },
   });
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
   if (error) return <p>Error : {error.message}</p>;
 
   const totalPages = data.characters.info.pages;
