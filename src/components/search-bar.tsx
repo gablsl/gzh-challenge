@@ -1,3 +1,4 @@
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
 type SearchBarProps = {
@@ -5,17 +6,26 @@ type SearchBarProps = {
 };
 
 export function SearchBar({ onSearch }: SearchBarProps) {
-  const [character, setCharacter] = useState('');
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const searchParam = searchParams.get('q') || '';
+  const [character, setCharacter] = useState(searchParam);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const newParams = new URLSearchParams();
+    if (character) newParams.set('q', character);
+    router.push(`/?${newParams.toString()}`);
+
     onSearch(character);
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className='flex gap-2 sm:flex-row sm:items-center'
+      className='px-0 md:px-6 lg:px-13 flex gap-2 flex-row items-center justify-center'
     >
       <input
         type='text'

@@ -19,6 +19,22 @@
 
 @layer components {
   .pagination-button {
-    @apply px-4 py-2 bg-purple-600 rounded disabled:opacity-50 hover:bg-purple-700;
+    @apply px-4 py-2 text-white bg-purple-600 rounded disabled:opacity-50 hover:bg-purple-700;
   }
+
+  .back-btn {
+    @apply bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded text-sm sm:text-base transition-colors;
+  }
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  @apply bg-gray-600 rounded-[5px];
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply bg-purple-600 rounded-2xl;
 }

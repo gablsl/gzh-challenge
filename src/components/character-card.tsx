@@ -9,8 +9,8 @@ export function CharacterCard({ image, name, species }: Character) {
           src={image}
           alt={`Personagem ${name}`}
           fill
-          className=''
           sizes='(max-width: 600px) 50vw, 25vw'
+          priority
         />
       </div>
 
