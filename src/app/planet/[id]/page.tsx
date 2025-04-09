@@ -4,22 +4,21 @@ import { Loading } from '@/components/loading';
 import { GET_PLANET_INFO } from '@/lib/graphql/queries';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'next/navigation';
+import { Resident } from '@/lib/graphql/types';
+import { Back } from '@/components/back';
 import Image from 'next/image';
 import Link from 'next/link';
-import { normalizeName } from '@/utils/normalize-name';
-import { Resident } from '@/lib/graphql/types';
 
 export default function PlanetPage() {
-  const { name } = useParams();
-  const planetName = decodeURIComponent(name as string).replace(/-/g, ' ');
+  const { id } = useParams();
+  const validId = typeof id === 'string' && id.trim() && id !== 'null';
 
   const { loading, error, data } = useQuery(GET_PLANET_INFO, {
-    variables: { name: planetName },
+    variables: { id },
+    skip: !validId,
   });
 
   if (loading) return <Loading />;
-
-  console.log('Dados recebidos:', data);
 
   if (error)
     return (
@@ -30,19 +29,14 @@ export default function PlanetPage() {
       </div>
     );
 
-  const planet = data?.locations?.results[0];
+  const planet = data?.location;
 
-  if (!planet) {
+  if (!validId) {
     return (
       <div className='bg-gray-900 p-6'>
         <div className='max-w-4xl mx-auto bg-gray-800 p-6 rounded-xl shadow-lg'>
-          <p className='text-white'>Planeta não encontrado</p>
-          <Link
-            href='/'
-            className='text-blue-400 hover:text-blue-300 mt-4 inline-block'
-          >
-            ← Voltar para lista
-          </Link>
+          <Back />
+          <p className='text-white'>Origem não encontrada</p>
         </div>
       </div>
     );
@@ -51,23 +45,18 @@ export default function PlanetPage() {
   return (
     <div className='bg-gray-900 min-h-screen p-4 md:p-6'>
       <div className='max-w-4xl mx-auto'>
-        <Link
-          href='/'
-          className='flex items-center text-gray-300 hover:text-blue-200 transition-colors mb-6'
-        >
-          ← Voltar para a lista
-        </Link>
+        <Back />
 
         <div className='bg-gray-800 rounded-xl shadow-lg overflow-hidden'>
           <div className='p-6'>
             <div className='flex justify-between items-start'>
-              <h1 className='text-3xl font-bold text-white'>{planet.name}</h1>
-              <div className='flex gap-4'>
+              <h1 className='text-3xl font-bold text-white'>{planet?.name}</h1>
+              <div className='flex flex-col md:flex-row gap-4'>
                 <span className='inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-white'>
-                  {planet.type}
+                  {planet?.type}
                 </span>
                 <span className='inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-600 text-white'>
-                  {planet.dimension || 'Dimensão desconhecida'}
+                  {planet?.dimension || 'Dimensão desconhecida'}
                 </span>
               </div>
             </div>
@@ -79,17 +68,17 @@ export default function PlanetPage() {
 
               {planet.residents?.length > 0 ? (
                 <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4'>
-                  {planet.residents.map((resident: Resident) => (
+                  {planet.residents?.map((resident: Resident) => (
                     <Link
-                      key={resident.id}
-                      href={`/character/${normalizeName(resident.name)}`}
+                      key={resident?.id}
+                      href={`/character/${resident.id}`}
                       className='bg-gray-700 rounded-lg p-3 hover:bg-gray-600 transition-colors'
                     >
-                      {resident.image && (
+                      {resident?.image && (
                         <div className='relative h-32 w-full mb-2'>
                           <Image
-                            src={resident.image}
-                            alt={resident.name}
+                            src={resident?.image}
+                            alt={resident?.name}
                             fill
                             className='object-cover rounded-md'
                             sizes='100vw'
@@ -97,7 +86,7 @@ export default function PlanetPage() {
                         </div>
                       )}
                       <p className='text-white text-center truncate'>
-                        {resident.name}
+                        {resident?.name}
                       </p>
                     </Link>
                   ))}
