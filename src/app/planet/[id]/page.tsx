@@ -22,7 +22,7 @@ export default function PlanetPage() {
 
   if (loading) return <Loading />;
 
-  if (error) return router.push('/500');
+  if (error) return router.push('/error');
 
   const planet = data?.location;
 
