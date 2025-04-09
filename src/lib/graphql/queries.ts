@@ -33,3 +33,21 @@ export const GET_CHARACTER_BY_NAME = gql`
     }
   }
 `;
+
+export const GET_PLANET_INFO = gql`
+  query GetPlanetInfo($name: String!) {
+    locations(filter: { name: $name }) {
+      results {
+        id
+        name
+        type
+        dimension
+        residents {
+          id
+          name
+          image
+        }
+      }
+    }
+  }
+`;

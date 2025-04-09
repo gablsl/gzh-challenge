@@ -9,3 +9,16 @@ export type Character = {
     name: string;
   };
 };
+
+export type Resident = {
+  id: string;
+  name: string;
+  image: string;
+};
+
+export type Planet = {
+  name: string;
+  type: string;
+  dimension: string;
+  residents: Resident;
+};
