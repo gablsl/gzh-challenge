@@ -11,9 +11,6 @@
 - **Tailwind CSS**  
   Utilizado para estilização. Tenho grande familiaridade e por ser breakpoints (sm, md, lg) facilitam a não me preocupar com os tamanhos na hora da responsividade optei por Tailwind.
 
-- **useState**  
-  Optei por não usar ContextAPI ou Redux pois como é um projeto simples e não criei nenhum estado que seria compartilhado entre vários componentes escolhi o useState por ser que julguei ser a melhor opção nesse caso e mais simples de ser implementado.
-
 ---
 
 ## 🚀 Como rodar o projeto localmente
@@ -45,6 +42,8 @@ npm run dev
 - Os componentes são modulares e reutilizáveis, priorizando organização e legibilidade.
 
 - Escolha do TypeScript por conta forte tipagem, tornar o código mais legível e facilitar a manutenção
+
+- Optei por não usar ContextAPI ou Redux pois como é um projeto simples e não criei nenhum estado que seria compartilhado entre vários componentes escolhi o useState por ser que julguei ser a melhor opção nesse caso e mais simples de ser implementado.
 
 ## 📌 Observações importantes
 
