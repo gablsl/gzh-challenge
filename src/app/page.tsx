@@ -32,8 +32,8 @@ export default function Home() {
     <div className='p-5 md:p-8 flex flex-col gap-8'>
       <SearchBar onSearch={setSearch} />
 
-      <div className='p-4 flex justify-center'>
-        <div className='grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4 lg:grid-cols-4 xl:grid-cols-4 w-full'>
+      <div className='flex justify-center'>
+        <div className='grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4 lg:grid-cols-4 xl:grid-cols-4'>
           {data.characters.results.length === 0 ? (
             <div className='col-span-full flex justify-center items-center py-8'>
               <p className='text-white text-sm md:text-lg'>

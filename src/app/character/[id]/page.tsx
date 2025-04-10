@@ -35,7 +35,7 @@ export default function CharacterPage() {
         <Back />
 
         <div className='bg-gray-800 rounded-xl shadow-lg overflow-hidden'>
-          <div className='relative h-48 md:h-81 lg:h-116 w-full'>
+          <div className='relative h-64 md:h-115 w-full'>
             <Image
               src={character.image}
               alt={character.name}
