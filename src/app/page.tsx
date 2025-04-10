@@ -29,14 +29,14 @@ export default function Home() {
   const totalPages = data.characters.info.pages;
 
   return (
-    <div className='p-4 flex flex-col gap-8'>
+    <div className='p-5 md:p-8 flex flex-col gap-8'>
       <SearchBar onSearch={setSearch} />
 
-      <div className='flex justify-center'>
-        <div className='grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4 lg:grid-cols-4 xl:grid-cols-4'>
+      <div className='p-4 flex justify-center'>
+        <div className='grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4 lg:grid-cols-4 xl:grid-cols-4 w-full'>
           {data.characters.results.length === 0 ? (
-            <div>
-              <p className='text-center text-white text-lg mt-8'>
+            <div className='col-span-full flex justify-center items-center py-8'>
+              <p className='text-white text-sm md:text-lg'>
                 Nenhum personagem encontrado.
               </p>
             </div>
@@ -55,23 +55,29 @@ export default function Home() {
       ) : (
         <div className='flex items-center gap-4 mt-8 sm:flex-row sm:justify-center'>
           <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            onClick={() => {
+              setCurrentPage((prev) => Math.max(prev - 1, 1));
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             disabled={currentPage === 1}
-            className='pagination-button disabled:opacity-50 disabled:cursor-not-allowed'
+            className='pagination-button'
           >
             Anterior
           </button>
 
           <span className='px-4 py-2 text-white text-sm sm:text-base'>
-            Página {currentPage} de {totalPages}
+            Pág {currentPage} de {totalPages}
           </span>
 
           <button
-            onClick={() => setCurrentPage((prev) => prev + 1)}
+            onClick={() => {
+              setCurrentPage((prev) => prev + 1);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             disabled={
               currentPage === totalPages || data.characters.results.length === 0
             }
-            className='pagination-button disabled:opacity-50 disabled:cursor-not-allowed'
+            className='pagination-button'
           >
             Próxima
           </button>

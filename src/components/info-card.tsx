@@ -14,12 +14,12 @@ export function InfoCard({ label, value, isLink, href }: InfoCardProps) {
       {isLink && href ? (
         <Link
           href={href}
-          className='mt-1 text-lg font-semibold text-white hover:text-blue-400 transition-colors'
+          className='text-sm md:text-lg font-semibold text-white hover:text-blue-400 transition-colors'
         >
           {value || 'Desconhecida'}
         </Link>
       ) : (
-        <p className='mt-1 text-lg font-semibold text-white'>
+        <p className='text-sm md:text-lg font-semibold text-white'>
           {value || 'Desconhecida'}
         </p>
       )}

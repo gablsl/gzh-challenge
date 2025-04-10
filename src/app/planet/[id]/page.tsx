@@ -31,14 +31,16 @@ export default function PlanetPage() {
   }
 
   return (
-    <div className='bg-gray-900 min-h-screen p-4 md:p-6'>
-      <div className='max-w-4xl mx-auto'>
+    <div className='bg-gray-900 p-5 md:p-8'>
+      <div className='max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto'>
         <Back />
 
         <div className='bg-gray-800 rounded-xl shadow-lg overflow-hidden'>
-          <div className='p-6'>
-            <div className='flex justify-between items-start'>
-              <h1 className='text-3xl font-bold text-white'>{planet?.name}</h1>
+          <div className='p-6 md:p-8'>
+            <div className='flex flex-col gap-4 md:flex-row md:gap-0 justify-between items-center'>
+              <h1 className='text-2xl md:text-3xl font-bold text-white'>
+                {planet?.name}
+              </h1>
               <div className='flex flex-col md:flex-row gap-4'>
                 <span className='inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-white'>
                   {planet?.type}
