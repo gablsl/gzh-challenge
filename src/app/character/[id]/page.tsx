@@ -30,12 +30,12 @@ export default function CharacterPage() {
   }
 
   return (
-    <div className='bg-gray-900 p-4 md:p-6'>
-      <div className='max-w-4xl mx-auto'>
+    <div className='bg-gray-900 p-5 md:p-8'>
+      <div className='max-w-xl md:max-w-xl lg:max-w-2xl mx-auto'>
         <Back />
 
         <div className='bg-gray-800 rounded-xl shadow-lg overflow-hidden'>
-          <div className='relative h-64 md:h-115 w-full'>
+          <div className='relative h-48 md:h-81 w-full'>
             <Image
               src={character.image}
               alt={character.name}
@@ -47,7 +47,7 @@ export default function CharacterPage() {
 
           <div className='p-6'>
             <div className='flex justify-between items-center'>
-              <h1 className='text-3xl font-bold text-white'>
+              <h1 className='text-2xl md:text-3xl font-bold text-white'>
                 {character.name}
               </h1>
               <span

@@ -3,23 +3,24 @@ import Image from 'next/image';
 
 export function CharacterCard({ image, name, species }: Character) {
   return (
-    <div className='bg-gray-800 rounded-lg shadow-sm border border-gra-80 cursor-pointer hover:bg-gray-600 transition-colors'>
-      <div className='w-full aspect-square relative'>
+    <div className='w-full h-full flex flex-col bg-gray-800 rounded-lg shadow-sm border border-gray-700 cursor-pointer hover:bg-gray-700 transition-colors'>
+      <div className='w-full aspect-square relative overflow-hidden rounded-t-lg'>
         <Image
           src={image}
           alt={`Personagem ${name}`}
           fill
-          sizes='(max-width: 600px) 50vw, 25vw'
+          className='object-cover'
+          sizes='(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw'
           priority
         />
       </div>
 
-      <div className='p-3 md:p-4'>
-        <h3 className='font-medium text-white text-base md:text-lg truncate'>
+      <div className='p-3 md:p-4 h-[90px] flex flex-col justify-between'>
+        <h3 className='font-medium text-white text-base md:text-lg line-clamp-2 leading-tight truncate'>
           {name}
         </h3>
-        <p className='text-white text-sm md:text-base mt-1'>
-          <span className='font-semibold text-gray-400'>Especié:</span>{' '}
+        <p className='text-gray-300 text-sm md:text-base truncate'>
+          <span className='font-semibold text-gray-400'>Espécie:</span>{' '}
           {species}
         </p>
       </div>

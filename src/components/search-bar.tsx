@@ -25,18 +25,18 @@ export function SearchBar({ onSearch }: SearchBarProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className='px-0 md:px-6 lg:px-13 flex gap-2 flex-row items-center justify-center'
+      className='w-full flex gap-2 flex-row items-center justify-center'
     >
       <input
         type='text'
         placeholder='Digite um personagem'
         value={character}
         onChange={(e) => setCharacter(e.target.value)}
-        className='w-full border border-white text-white p-3 bg-transparent placeholder-white rounded'
+        className='w-full text-sm md:text-lg border border-white text-white p-3 bg-transparent placeholder-white rounded'
       />
       <button
         type='submit'
-        className='bg-purple-600 text-white border border-bg-white p-3 rounded hover:bg-purple-700 transition-colors'
+        className='bg-purple-600 text-white border border-bg-white p-3 text-sm md:text-lg rounded hover:bg-purple-700 transition-colors'
       >
         Buscar
       </button>
